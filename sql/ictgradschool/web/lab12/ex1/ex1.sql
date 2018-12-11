@@ -13,10 +13,11 @@ SELECT Concat(fname," ",lname) AS Student_Name, country FROM unidb_students ORDE
 
 -- E. List the student names and mentors, ordered by mentors
 SELECT Concat(fname," ",lname) AS Student_Name,mentor FROM unidb_students ORDER BY mentor;
+
 -- not sure about this one
-SELECT *
-FROM unidb_students AS student, unidb_students AS mentor
-WHERE mentors.mentor = students.id order by students.lname;
+SELECT Concat(mentor.fname," ",mentor.lname) AS Student_Name,Concat(student.fname," ",student.lname) AS Mentor_Name
+FROM unidb_students AS mentor, unidb_students AS student
+WHERE mentor.mentor = student.id order by student.lname;
 
 -- F. List the lecturers, ordered by office
 SELECT CONCAT(fname," ",lname) AS Lecturer_Name FROM unidb_lecturers ORDER BY office;
