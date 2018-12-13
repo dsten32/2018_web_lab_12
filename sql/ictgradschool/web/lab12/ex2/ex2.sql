@@ -1,10 +1,6 @@
 -- Answers to exercise 2 questions
 
 -- A. What are the names of the students who attend COMP219?
-# SELECT id
-# FROM unidb_attend
-# Where concat(dept,num) LIKE 'comp219';
-
 SELECT CONCAT(stu.fname,' ',stu.lname) AS studentname
 FROM unidb_students AS stu, unidb_attend AS att
 WHERE stu.id = att.id AND concat(att.dept,att.num) LIKE 'comp219';
@@ -20,12 +16,7 @@ FROM unidb_lecturers AS lect, unidb_teach AS teach
 WHERE lect.staff_no = teach.staff_no AND teach.num=219;
 
 -- D. What are the names of the students taught by Te Taka?
-SELECT num
-FROM unidb_teach As T
-JOIN unidb_lecturers AS L ON T.staff_no = L.staff_no
-where fname like 'Te Taka';
-
-
+-- subquery
 SELECT DISTINCT fname,lname
 FROM unidb_attend As attend
 JOIN unidb_students As student ON attend.id = student.id
@@ -33,9 +24,8 @@ WHERE attend.dept = 'comp' AND attend.num in (SELECT num
                                               FROM unidb_teach As T
                                                      JOIN unidb_lecturers AS L ON T.staff_no = L.staff_no
                                               where fname like 'Te Taka');
-# WHERE attend.dept = 'comp' AND attend.num = 219 OR attend.num= 258;
 
-
+-- joined??
 SELECT DISTINCT CONCAT(stu.fname,' ',stu.lname) AS studentname
 FROM unidb_students AS stu,
      unidb_lecturers AS lect,
